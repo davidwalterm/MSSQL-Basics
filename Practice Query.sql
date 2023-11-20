@@ -18,7 +18,7 @@ SELECT * FROM Customers WHERE NOT Country='Germany';
 
 SELECT * FROM Customers WHERE Country='Germany' AND (City='Berlin' OR City='Munchen');
 
-SELECT * FROM Customers WHERE ORDER BY Country;
+SELECT * FROM Customers ORDER BY Country;
 
 SELECT * FROM Customers ORDER BY Country DESC;
 
@@ -84,35 +84,43 @@ SELECT CustomerID AS ID, CustomerName AS Customer FROM Customers;
 
 SELECT CustomerName AS Customer, ContactName AS [Contact Person] FROM Customers;
 
-SELECT o.OrderID, o.OrderDate, c.CustomerName FROM Customer AS c, Orders AS o WHERE c.CustomerName='Around the Horn' AND c.CustomerID =o.CustomerID
+SELECT o.OrderID, o.OrderDate, c.CustomerName 
+FROM Customer AS c, Orders AS o WHERE c.CustomerName='Around the Horn' AND c.CustomerID =o.CustomerID
 
 SELECT Orders.OrderID, Customers.CustomerName FROM Orders INNER JOIN Customer ON Orders.CustomerID = Customers.CustomerID;
 
-SELECT Customers.CustomerName, Orders.OrderID FROM Customers LEFT JOIN Orders ON Customers.CustomerID=Orders.CustomerID ORDER BY Customers.CustomerName;
+SELECT Customers.CustomerName, Orders.OrderID FROM Customers 
+LEFT JOIN Orders ON Customers.CustomerID=Orders.CustomerID ORDER BY Customers.CustomerName;
 
-SELECT Orders.OrderID, Employees.LastName, Employees.FirstName FROM Orders RIGHT JOIN Employees ON Orders.EmployeeID = Employees.EmployeeID ORDER BY Orders.OrderID;
+SELECT Orders.OrderID, Employees.LastName, Employees.FirstName 
+FROM Orders RIGHT JOIN Employees ON Orders.EmployeeID = Employees.EmployeeID ORDER BY Orders.OrderID;
 
-SELECT A.CustomerName AS CustomerName1, B.CustomerName AS CustomerName2, A.City FROM Customers A, Customers B WHERE A.CustomerID <> B.CustomerID AND A.City = B.City ORDER BY A.City;
+SELECT A.CustomerName AS CustomerName1, B.CustomerName AS CustomerName2, A.City 
+FROM Customers A, Customers B WHERE A.CustomerID <> B.CustomerID AND A.City = B.City ORDER BY A.City;
 
 SELECT City FROM Customers UNION SELECT City FROM Suppliers ORDER BY City;
 
 SELECT City FROM Customers UNION ALL SELECT City FROM Suppliers ORDER BY City;
 
-SELECT City, Country FROM Customers WHERE Country='Germany' UNION SELECT City, Country FROM Suppliers WHERE Country='Germany' ORDER BY City;
+SELECT City, Country FROM Customers WHERE Country='Germany' 
+UNION SELECT City, Country FROM Suppliers WHERE Country='Germany' ORDER BY City;
 
-SELECT City, Country FROM Customers WHERE Country='Germany' UNION ALL SELECT City, Country FROM Suppliers WHERE Country='Germany' ORDER BY City;
+SELECT City, Country FROM Customers WHERE Country='Germany' 
+UNION ALL SELECT City, Country FROM Suppliers WHERE Country='Germany' ORDER BY City;
 
 SELECT COUNT(CustomerID), Country FROM Customers GROUP BY Country;
 
 SELECT COUNT(CustomerID), Country FROM Customers GROUP BY Country ORDER BY COUNT(CustomerID) DESC;
 
-SELECT Shippers.ShipperName, COUNT(Orders.OrderID) AS NumberOfOrders FROM Orders LEFT JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID GROUP BY ShipperName;
+SELECT Shippers.ShipperName, COUNT(Orders.OrderID) AS NumberOfOrders FROM Orders 
+LEFT JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID GROUP BY ShipperName;
 
 SELECT COUNT(CustomerID), Country FROM Customers GROUP BY Country HAVING COUNT(CustomerID) > 5;
 
 SELECT COUNT(CustomerID), Country FROM Customers GROUP BY Country HAVING COUNT(CustomerID) > 5 ORDER BY COUNT(CustomerID) DESC;
 
-SELECT SupplierName FROM Suppliers WHERE EXISTS (SELECT ProductName FROM Products WHERE Products.SuppliersID = Suppliers.suplierID AND Price < 20);
+SELECT SupplierName FROM Suppliers 
+WHERE EXISTS (SELECT ProductName FROM Products WHERE Products.SuppliersID = Suppliers.suplierID AND Price < 20);
 
 SELECT ProductName FROM Products WHERE ProductID = ANY (SELECT ProductID FROM OrderDetails WHERE Quantity = 10)
 
@@ -141,6 +149,8 @@ SELECT * FROM Customers;
 
 CREATE DATABASE databasename;
 
+USE DATABASE databasename;
+
 DROP DATABASE databasename;
 
 BACKUP DATABASE databasename TO DISK = 'filepath';
@@ -148,11 +158,11 @@ BACKUP DATABASE databasename TO DISK = 'filepath';
 CREATE TABLE table_name (
 	column1 datatype,
 	column2 datatype,
-	columnt3 datatype,
+	column3 datatype,
 	...
 );
 
-CREAT TABLE Persons (
+CREATE TABLE Persons (
 	PersonID int,
 	LastName varchar(255),
 	FirstName varchar(255),

@@ -314,3 +314,41 @@ inner join sales.customers c2 on c1.customer_id <> c2.customer_id and c1.city = 
 where c1.city = 'Albany'
 order by c1.city, customer_1, customer_2
 
+select customer_id, year(order_date) order_year from sales.orders where customer_id in (1,2) order by customer_id;
+
+select customer_id, year(order_date) order_year from sales.orders where customer_id in (1,2) group by customer_id, year (order_date) order by customer_id;
+
+select distinct customer_id, year(order_date) order_year from sales.orders where customer_id in (1,2) order by customer_id;
+
+select customer_id, year(order_date) order_year, count(order_id) order_placed 
+from sales.orders
+where customer_id in (1,2) group by customer_id, year(order_date) order by customer_id;
+
+select customer_id, year(order_date) order_year, order_status 
+from sales.orders 
+where customer_id in (1,2) 
+group by customer_id, year(order_date), order_status
+order by customer_id;
+
+select city, count(customer_id) customer_count from sales.customers group by city order by city;
+
+select city, state, count(customer_id) customer_count from sales.customers group by city, state order by city, state;
+
+select brand_name, min(list_price) min_price, max(list_price) max_price
+from production.products p
+inner join production.brands b on b.brand_id = p.brand_id
+where model_year = 2018
+group by brand_name
+order by brand_name;
+
+select brand_name, avg(list_price) avg_price
+from production.products p
+inner join production.brands b on b.brand_id = p.brand_id
+where model_year = 2018
+group by brand_name
+order by brand_name;
+
+select order_id, sum(quantity * list_price * (1 - discount)) net_value 
+from sales.order_items
+group by order_id;
+
